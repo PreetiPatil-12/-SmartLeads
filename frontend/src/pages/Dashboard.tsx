@@ -14,15 +14,6 @@ const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
 
   const debouncedSearch = useDebounce(search, 500);
-  const deleteLead = async (id: string) => {
-  try {
-    await API.delete(`/leads/${id}`);
-
-    fetchLeads();
-  } catch (err) {
-    console.log(err);
-  }
-};
   const fetchLeads = async () => {
     try {
       const res = await API.get('/leads', {
