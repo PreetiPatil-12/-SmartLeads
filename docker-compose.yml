@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./backend:/app
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/smartleads
+      - JWT_SECRET=supersecretkey
+
+  frontend:
+    build: ./frontend
+    ports:
+      - '5173:5173'
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
